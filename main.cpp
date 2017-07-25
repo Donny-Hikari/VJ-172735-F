@@ -10,8 +10,8 @@
 #include <map>
 using namespace std;
 
-typedef long LONG;
-typedef int INT;
+typedef long long LONG;
+typedef long INT;
 const INT MAXSA = 1e5 + 10;
 LONG A[MAXSA];
 INT n;
