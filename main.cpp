@@ -19,13 +19,15 @@ LONG k;
 
 inline bool chk(LONG tp)
 {
-    LONG cnt = 0;
+    LONG cnt = 0, t;
     for (INT i = 0; i < n; ++i)
     {
         //if (A[i] <= tp) continue;
         LONG diff = A[i] - tp;
         if (diff <= 0) return true;
-        cnt += (diff - 1) / k + 1;
+        t = diff / k + ((diff%k==0)?0:1);
+        cnt += t;
+        //cnt += (diff - 1) / k + 1;
         if (cnt > tp) return false;
     }
     return true;
