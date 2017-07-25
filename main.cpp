@@ -10,21 +10,20 @@
 #include <map>
 using namespace std;
 
-typedef long long LL;
-const long MAXSA = 1e5 + 10;
-LL A[MAXSA];
-long n;
-LL k;
+typedef long LONG;
+typedef int INT;
+const INT MAXSA = 1e5 + 10;
+LONG A[MAXSA];
+INT n;
+LONG k;
 
-bool chk(LL tp)
+inline bool chk(LONG tp)
 {
-    LL cnt = 0, t;
-    for (long i = 0; i < n; ++i)
+    LONG cnt = 0;
+    for (INT i = 0; i < n; ++i)
     {
-        LL diff = A[i] - tp;
-        if (diff <= 0) return true;
-        t = diff / k + ((diff % k == 0) ? 0 : 1);
-        cnt += t;
+        if (A[i] <= tp) continue;
+        cnt += (A[i] - tp - 1) / k + 1;
         if (cnt > tp) return false;
     }
     return true;
@@ -35,30 +34,33 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    while (cin >> n)
+    while (!cin.eof() && cin >> n)
     {
-        for (long i = 0; i < n; ++i)
+        int mx = 0;
+        for (INT i = 0; i < n; ++i)
+        {
             cin >> A[i];
-        sort(A, A + n, greater<LL>());
+            if (A[i] > mx) mx = A[i];
+        }
+        //sort(A, A + n, greater<LONG>());
         cin >> k;
         if (k <= 1)
         {
-            cout << A[0] << endl;
+            cout << mx << endl;
             continue;
         }
         --k;
-        LL tp = 0;
-        LL b = 0, e = A[0], ans = 0;
+        LONG tp = 0;
+        LONG b = 1, e = mx;
         while (b <= e)
         {
             tp = (b + e) >> 1;
             if (chk(tp))
-                ans = tp,
                 e = tp - 1;
             else
                 b = tp + 1;
         }
-        cout << ans << endl;
+        cout << b << endl;
     }
 
     return 0;
