@@ -10,8 +10,8 @@
 #include <map>
 using namespace std;
 
-typedef long long LONG;
-typedef long INT;
+typedef long LONG;
+typedef int INT;
 const INT MAXSA = 1e5 + 10;
 LONG A[MAXSA];
 INT n;
@@ -19,15 +19,13 @@ LONG k;
 
 inline bool chk(LONG tp)
 {
-    LONG cnt = 0, t;
+    LONG cnt = 0;
     for (INT i = 0; i < n; ++i)
     {
         //if (A[i] <= tp) continue;
         LONG diff = A[i] - tp;
         if (diff <= 0) return true;
-        t = diff / k + ((diff%k==0)?0:1);
-        cnt += t;
-        //cnt += (diff - 1) / k + 1;
+        cnt += diff / k + ((diff%k==0)?0:1);
         if (cnt > tp) return false;
     }
     return true;
