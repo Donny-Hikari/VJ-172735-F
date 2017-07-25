@@ -22,8 +22,10 @@ inline bool chk(LONG tp)
     LONG cnt = 0;
     for (INT i = 0; i < n; ++i)
     {
-        if (A[i] <= tp) continue;
-        cnt += (A[i] - tp - 1) / k + 1;
+        //if (A[i] <= tp) continue;
+        LONG diff = A[i] - tp;
+        if (diff <= 0) return true;
+        cnt += (diff - 1) / k + 1;
         if (cnt > tp) return false;
     }
     return true;
@@ -36,22 +38,23 @@ int main()
 
     while (!cin.eof() && cin >> n)
     {
-        int mx = 0;
+        //int mx = 0;
         for (INT i = 0; i < n; ++i)
         {
             cin >> A[i];
-            if (A[i] > mx) mx = A[i];
+            //if (A[i] > mx) mx = A[i];
         }
-        //sort(A, A + n, greater<LONG>());
+        sort(A, A + n, greater<LONG>());
         cin >> k;
         if (k <= 1)
         {
-            cout << mx << endl;
+            cout << A[0] << endl;
+            //cout << mx << endl;
             continue;
         }
         --k;
         LONG tp = 0;
-        LONG b = 1, e = mx;
+        LONG b = 1, e = A[0];
         while (b <= e)
         {
             tp = (b + e) >> 1;
